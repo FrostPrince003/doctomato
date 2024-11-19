@@ -65,5 +65,5 @@ async def predict_endpoint(file: UploadFile = File(...)):
         # Handle errors (e.g., invalid file format)
         return JSONResponse(content={"error": str(e)}, status_code=400)
 
-if __name__=="__main__":
-    uvicorn.run(app,host='192.168.1.105',port=8000,reload=True)
+# if __name__=="__main__":
+#     uvicorn.run(app,host='192.168.1.105',port=8000,reload=True)

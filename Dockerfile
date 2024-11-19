@@ -4,5 +4,6 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 8000
-CMD ["python", "tomato_disease_backend.py"]
+CMD ["uvicorn", "tomato_disease_backend:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
 
