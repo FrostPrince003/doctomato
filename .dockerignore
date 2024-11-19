@@ -1,0 +1,30 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore virtual environment directories
+env/
+venv/
+*.venv/
+
+# Ignore version control system directories (Git, Mercurial, etc.)
+.git/
+.gitignore
+
+# Ignore Docker-related files
+Dockerfile
+.dockerignore
+
+# Ignore log files and temporary files
+*.log
+*.tmp
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore any other unnecessary files or directories
+*.bak
+*.swp
+*.db
