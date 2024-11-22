@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import PlainTextResponse
 from fastapi.responses import JSONResponse
 import torch
 import torch.nn as nn
@@ -6,6 +7,8 @@ from torchvision import models, transforms
 from PIL import Image
 import io
 import uvicorn
+from prometheus_client import start_http_server, Counter,generate_latest, REGISTRY
+import time
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -37,6 +40,8 @@ class_names = [
     "Tomato___Septoria_leaf_spot", "Tomato___Spider_mites Two-spotted_spider_mite", "Tomato___Target_Spot", "Tomato___Tomato_mosaic_virus", 
     "Tomato___Tomato_Yellow_Leaf_Curl_Virus"
 ]
+# Create a simple Prometheus counter metric
+REQUEST_COUNT = Counter("http_requests_total", "Total count of HTTP requests")
 
 # Prediction function
 def predict(image: Image.Image):
@@ -64,6 +69,10 @@ async def predict_endpoint(file: UploadFile = File(...)):
     except Exception as e:
         # Handle errors (e.g., invalid file format)
         return JSONResponse(content={"error": str(e)}, status_code=400)
+    
+@app.get("/metrics", response_class=PlainTextResponse)
+async def metrics():
+    return generate_latest(REGISTRY)
 
 # if __name__=="__main__":
 #     uvicorn.run(app,host='192.168.1.105',port=8000,reload=True)
