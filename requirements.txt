@@ -7,4 +7,5 @@ python-multipart==0.0.17
 prometheus-client==0.21.0
 pytest==8.3.3
 httpx[cli]
-structlog loguru
+structlog 
+loguru
