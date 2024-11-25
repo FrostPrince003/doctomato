@@ -6,7 +6,6 @@ from torchvision import models, transforms
 from PIL import Image
 import io
 from prometheus_client import start_http_server, Counter, generate_latest, REGISTRY
-# from prometheus_fastapi_instrumentator import Instrumentator
 from loguru import logger
 import time
 import requests
@@ -14,14 +13,12 @@ import json
 
 # Initialize FastAPI app
 app = FastAPI()
-# instrumentator = Instrumentator()
-# instrumentator.add(app)  
 
 # Define device (CUDA if available)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Define the model architecture (should match the one used during training)
-num_classes = 10  # Adjust this to match your dataset's number of classes
+num_classes = 10  
 model = models.resnet18(pretrained=False)  # Use the same model architecture as during training
 model.fc = nn.Linear(model.fc.in_features, num_classes)
 
