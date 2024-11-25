@@ -14,7 +14,7 @@ def test_predict():
     assert "predicted_label" in response.json()
 
 # # Test for the metrics endpoint
-# def test_metrics():
-#     response = client.get("/metrics")
-#     assert response.status_code == 200
-#     assert "http_requests_total" in response.text  # Check if the metric is present
+def test_metrics():
+     response = client.get("/metrics")
+     assert response.status_code == 200
+     assert "http_requests_total" in response.text  # Check if the metric is present
